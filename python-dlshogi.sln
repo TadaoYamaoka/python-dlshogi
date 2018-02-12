@@ -3,16 +3,32 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "python-dlshogi", "python-dlshogi.pyproj", "{3B9FC98C-D049-4AD2-B731-57EC667D6ECA}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "python-dlshogi", "python-dlshogi.pyproj", "{7161853F-B325-4C6E-961B-12CA0E483A74}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "utils", "utils\utils.pyproj", "{D8FB4182-B053-477B-9EF0-9C307AC5C0DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3B9FC98C-D049-4AD2-B731-57EC667D6ECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B9FC98C-D049-4AD2-B731-57EC667D6ECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7161853F-B325-4C6E-961B-12CA0E483A74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7161853F-B325-4C6E-961B-12CA0E483A74}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7161853F-B325-4C6E-961B-12CA0E483A74}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7161853F-B325-4C6E-961B-12CA0E483A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7161853F-B325-4C6E-961B-12CA0E483A74}.Release|x64.ActiveCfg = Release|Any CPU
+		{7161853F-B325-4C6E-961B-12CA0E483A74}.Release|x86.ActiveCfg = Release|Any CPU
+		{D8FB4182-B053-477B-9EF0-9C307AC5C0DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8FB4182-B053-477B-9EF0-9C307AC5C0DF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D8FB4182-B053-477B-9EF0-9C307AC5C0DF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D8FB4182-B053-477B-9EF0-9C307AC5C0DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8FB4182-B053-477B-9EF0-9C307AC5C0DF}.Release|x64.ActiveCfg = Release|Any CPU
+		{D8FB4182-B053-477B-9EF0-9C307AC5C0DF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

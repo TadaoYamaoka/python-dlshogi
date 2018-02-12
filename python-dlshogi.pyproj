@@ -3,15 +3,19 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>3b9fc98c-d049-4ad2-b731-57ec667d6eca</ProjectGuid>
-    <ProjectHome>.</ProjectHome>
-    <StartupFile>python_dlshogi.py</StartupFile>
+    <ProjectGuid>7161853f-b325-4c6e-961b-12ca0e483a74</ProjectGuid>
+    <ProjectHome>
+    </ProjectHome>
+    <StartupFile>pydlshogi\usi\usi_parallel_mcts_player.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>python-dlshogi</Name>
-    <RootNamespace>python-dlshogi</RootNamespace>
+    <RootNamespace>DeepLearningShogiBook</RootNamespace>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments>teacher_train_100 teacher_test_10 --ch 128</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +26,46 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="python_dlshogi.py" />
+    <Compile Include="pydlshogi\common.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pydlshogi\features.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pydlshogi\network\policy_bn.py" />
+    <Compile Include="pydlshogi\uct\uct_node.py" />
+    <Compile Include="pydlshogi\player\base_player.py" />
+    <Compile Include="pydlshogi\player\mcts_player.py" />
+    <Compile Include="pydlshogi\player\policy_player.py" />
+    <Compile Include="pydlshogi\network\policy_layer23.py" />
+    <Compile Include="pydlshogi\network\policy_value_resnet.py" />
+    <Compile Include="pydlshogi\network\policy_value.py" />
+    <Compile Include="pydlshogi\read_kifu.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pydlshogi\player\parallel_mcts_player.py" />
+    <Compile Include="pydlshogi\player\search1_player.py" />
+    <Compile Include="pydlshogi\network\value.py" />
+    <Compile Include="pydlshogi\network\policy.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pydlshogi\usi\usi_parallel_mcts_player.py" />
+    <Compile Include="pydlshogi\usi\usi_mcts_player.py" />
+    <Compile Include="pydlshogi\usi\usi_search1_player.py" />
+    <Compile Include="pydlshogi\usi\usi_policy_player.py" />
+    <Compile Include="pydlshogi\usi\usi.py" />
+    <Compile Include="setup.py" />
+    <Compile Include="train_policy_value_resnet.py" />
+    <Compile Include="train_policy_value.py" />
+    <Compile Include="train_value.py" />
+    <Compile Include="train_policy.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="pydlshogi\" />
+    <Folder Include="pydlshogi\network\" />
+    <Folder Include="pydlshogi\usi\" />
+    <Folder Include="pydlshogi\uct\" />
+    <Folder Include="pydlshogi\player\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
