@@ -77,7 +77,7 @@ for epoch in range(1, args.epoch + 1):
     for i in range(0, len(train), args.batchsize):
         # ミニバッチデータ
         train_batch = train_iter.next()
-        x, t = dataset.concat_examples(train_batch, args.gpu)
+        x, t = chainer.dataset.concat_examples(train_batch, args.gpu)
 
         # 順伝播
         y = model(x)
@@ -100,7 +100,7 @@ for epoch in range(1, args.epoch + 1):
     for i in range(0, len(test), args.batchsize):
         # ミニバッチデータ
         test_batch = test_iter.next()
-        x_test, t_test = dataset.concat_examples(test_batch, args.gpu)
+        x_test, t_test = chainer.dataset.concat_examples(test_batch, args.gpu)
 
         # 順伝播
         y_test = model(x_test)
