@@ -1,7 +1,7 @@
 ﻿import numpy as np
 import chainer
 from chainer import serializers
-from chainer import cuda, Variable
+from chainer import Variable
 import chainer.functions as F
 
 import shogi
@@ -39,7 +39,6 @@ class PolicyPlayer(BasePlayer):
     def isready(self):
         if self.model is None:
             self.model = PolicyNetwork()
-            self.model.to_gpu()
         serializers.load_npz(self.modelfile, self.model)
         print('readyok')
 
@@ -49,13 +48,13 @@ class PolicyPlayer(BasePlayer):
             return
 
         features = make_input_features_from_board(self.board)
-        x = Variable(cuda.to_gpu(np.array([features], dtype=np.float32)))
+        x = Variable(np.array([features], dtype=np.float32))
 
         with chainer.no_backprop_mode():
             y = self.model(x)
 
-            logits = cuda.to_cpu(y.data)[0]
-            probabilities = cuda.to_cpu(F.softmax(y).data)[0]
+            logits = y.data[0]
+            probabilities = F.softmax(y).data[0]
 
         # 全ての合法手について
         legal_moves = []

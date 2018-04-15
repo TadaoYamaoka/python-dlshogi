@@ -1,7 +1,7 @@
 ﻿import numpy as np
 import chainer
 from chainer import serializers
-from chainer import cuda, Variable
+from chainer import Variable
 import chainer.functions as F
 
 import shogi
@@ -39,7 +39,6 @@ class Search1Player(BasePlayer):
     def isready(self):
         if self.model is None:
             self.model = ValueNetwork()
-            self.model.to_gpu()
         serializers.load_npz(self.modelfile, self.model)
         print('readyok')
 
@@ -60,14 +59,14 @@ class Search1Player(BasePlayer):
 
             self.board.pop() # 1手戻す
 
-        x = Variable(cuda.to_gpu(np.array(features, dtype=np.float32)))
+        x = Variable(np.array(features, dtype=np.float32))
 
         # 自分の手番側の勝率にするため符号を反転
         with chainer.no_backprop_mode():
             y = -self.model(x)
 
-            logits = cuda.to_cpu(y.data).reshape(-1)
-            probabilities = cuda.to_cpu(F.sigmoid(y).data).reshape(-1)
+            logits = y.data.reshape(-1)
+            probabilities = F.sigmoid(y).data.reshape(-1)
 
         for i, move in enumerate(legal_moves):
             # 勝率を表示

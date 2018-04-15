@@ -1,6 +1,6 @@
 ﻿import numpy as np
 import chainer
-from chainer import cuda, Variable
+from chainer import Variable
 from chainer import optimizers, serializers
 import chainer.functions as F
 
@@ -35,7 +35,6 @@ args = parser.parse_args()
 logging.basicConfig(format='%(asctime)s\t%(levelname)s\t%(message)s', datefmt='%Y/%m/%d %H:%M:%S', filename=args.log, level=logging.DEBUG)
 
 model = PolicyNetwork()
-model.to_gpu()
 
 optimizer = optimizers.SGD(lr=args.lr)
 optimizer.setup(model)
@@ -91,8 +90,8 @@ def mini_batch(positions, i, batchsize):
         mini_batch_data.append(features)
         mini_batch_move.append(move)
 
-    return (Variable(cuda.to_gpu(np.array(mini_batch_data, dtype=np.float32))),
-            Variable(cuda.to_gpu(np.array(mini_batch_move, dtype=np.int32))))
+    return (Variable(np.array(mini_batch_data, dtype=np.float32)),
+            Variable(np.array(mini_batch_move, dtype=np.int32)))
 
 def mini_batch_for_test(positions, batchsize):
     mini_batch_data = []
@@ -102,8 +101,8 @@ def mini_batch_for_test(positions, batchsize):
         mini_batch_data.append(features)
         mini_batch_move.append(move)
 
-    return (Variable(cuda.to_gpu(np.array(mini_batch_data, dtype=np.float32))),
-            Variable(cuda.to_gpu(np.array(mini_batch_move, dtype=np.int32))))
+    return (Variable(np.array(mini_batch_data, dtype=np.float32)),
+            Variable(np.array(mini_batch_move, dtype=np.int32)))
 
 # train
 logging.info('start training')
