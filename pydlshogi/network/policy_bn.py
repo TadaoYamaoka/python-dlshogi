@@ -48,6 +48,6 @@ class PolicyNetwork(Chain):
 	    h9 = F.relu(self.norm9(self.l9(h8)))
 	    h10 = F.relu(self.norm10(self.l10(h9)))
 	    h11 = F.relu(self.norm11(self.l11(h10)))
-	    h12 = F.relu(self.norm2(self.l12(h11)))
+	    h12 = F.relu(self.norm12(self.l12(h11)))
 	    h13 = self.l13(h12)
 	    return self.l13_bias(F.reshape(h13, (-1, 9 * 9 * MOVE_DIRECTION_LABEL_NUM)))
