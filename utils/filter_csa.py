@@ -3,6 +3,8 @@ import os
 import re
 import statistics
 
+from tqdm import tqdm
+
 parser = argparse.ArgumentParser()
 parser.add_argument('dir', type=str)
 args = parser.parse_args()
@@ -16,7 +18,8 @@ ptn_rate = re.compile(r"^'(black|white)_rate:.*:(.*)$")
 
 kifu_count = 0
 rates = []
-for filepath in find_all_files(args.dir):
+n_kifu = len(list(find_all_files(args.dir)))
+for filepath in tqdm(find_all_files(args.dir), total=n_kifu, ncols=70):
     rate = {}
     move_len = 0
     toryo = False
