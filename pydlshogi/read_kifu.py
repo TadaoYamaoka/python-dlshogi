@@ -5,7 +5,7 @@ import copy
 import argparse
 import logging
 import os
-import _pickle as pickle
+import numpy as np
 import re
 from tqdm import tqdm
 
@@ -16,28 +16,26 @@ logging.basicConfig(format='%(asctime)s\t%(levelname)s\t%(message)s',
     level=os.environ.get("LOGLEVEL", "DEBUG"))
 
 
-# pickleファイルを読み込む
-def load_pickle(pickle_filename):
-    logging.info('Loading pickle %s' % (pickle_filename))
-    with open(pickle_filename, 'rb') as f:
-        positions = pickle.load(f)
+# 保存済みのダンプファイルを読み込む
+def load_dump(filename):
+    logging.info('Loading from %s' % (filename))
+    with open(filename, 'rb') as f:
+        positions = np.load(f)
     return positions
 
 
-# pickleファイルを保存する
-def save_pickle(pickle_filename, positions):
-    logging.info('Saving pickle %s' % (pickle_filename))
-    with open(pickle_filename, 'wb') as f:
-        pickle.dump(positions, f, pickle.HIGHEST_PROTOCOL)
-        logging.info('save pickle')
+# ファイルに棋譜データをダンプする
+def save_dump(filename, positions):
+    logging.info('Saving to %s' % (filename))
+    np.array(positions).dump(filename)
 
 
 # read kifu
 def read_kifu(kifu_list_file):
     logging.info('read kifu start')
-    pickle_filename = re.sub(r'\.[^\.]+$', '', kifu_list_file) + '.pickle'
-    logging.info('pickle_filename %s' % (pickle_filename))
-    if os.path.exists(pickle_filename): return load_pickle(pickle_filename)
+    dump_fname = re.sub(r'\.[^\.]+$', '', kifu_list_file) + '.pickle'
+    logging.info('dump_fname %s' % (dump_fname))
+    if os.path.exists(dump_fname): return load_dump(dump_fname)
 
     positions = []
     with open(kifu_list_file, 'r') as f:
@@ -65,7 +63,7 @@ def read_kifu(kifu_list_file):
                 positions.append((piece_bb, occupied, pieces_in_hand, move_label, win))
                 board.push_usi(move)
 
-    save_pickle(pickle_filename, positions)
+    save_dump(dump_fname, positions)
 
     logging.info('read kifu end')
     return positions
