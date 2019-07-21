@@ -1,6 +1,6 @@
 ﻿def usi(player):
     while True:
-        cmd_line = input()
+        cmd_line = input().strip()
         cmd = cmd_line.split(' ', 1)
 
         if cmd[0] == 'usi':
