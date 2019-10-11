@@ -11,9 +11,6 @@ from pydlshogi.read_kifu import *
 
 import argparse
 import random
-import pickle
-import os
-import re
 
 import logging
 
@@ -48,36 +45,11 @@ if args.resume:
     logging.info('Load optimizer state from {}'.format(args.resume))
     serializers.load_npz(args.resume, optimizer)
 
-logging.info('read kifu start')
-# 保存済みのpickleファイルがある場合、pickleファイルを読み込む
-# train date
-train_pickle_filename = re.sub(r'\..*?$', '', args.kifulist_train) + '.pickle'
-if os.path.exists(train_pickle_filename):
-    with open(train_pickle_filename, 'rb') as f:
-        positions_train = pickle.load(f)
-    logging.info('load train pickle')
-else:
-    positions_train = read_kifu(args.kifulist_train)
+# train data
+positions_train = read_kifu(args.kifulist_train)
 
 # test data
-test_pickle_filename = re.sub(r'\..*?$', '', args.kifulist_test) + '.pickle'
-if os.path.exists(test_pickle_filename):
-    with open(test_pickle_filename, 'rb') as f:
-        positions_test = pickle.load(f)
-    logging.info('load test pickle')
-else:
-    positions_test = read_kifu(args.kifulist_test)
-
-# 保存済みのpickleがない場合、pickleファイルを保存する
-if not os.path.exists(train_pickle_filename):
-    with open(train_pickle_filename, 'wb') as f:
-        pickle.dump(positions_train, f, pickle.HIGHEST_PROTOCOL)
-    logging.info('save train pickle')
-if not os.path.exists(test_pickle_filename):
-    with open(test_pickle_filename, 'wb') as f:
-        pickle.dump(positions_test, f, pickle.HIGHEST_PROTOCOL)
-    logging.info('save test pickle')
-logging.info('read kifu end')
+positions_test = read_kifu(args.kifulist_test)
 
 logging.info('train position num = {}'.format(len(positions_train)))
 logging.info('test position num = {}'.format(len(positions_test)))
